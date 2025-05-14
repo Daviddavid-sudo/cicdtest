@@ -22,8 +22,9 @@ jobs:
         python-version: '3.9' # Paramètre pour l'action setup-python
 
     - name: Install dependencies
-      run: pip install pytest # Exécute une commande shell
+      run: |
       pip install -r requirements.txt # Installe les dépendances à partir du fichier requirements.txt
+      pip install pytest # Exécute une commande shell
 
     - name: Run tests
       run: pytest
