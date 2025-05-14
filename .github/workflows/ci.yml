@@ -1,7 +1,5 @@
 name: Python CI
 
-on: [push, pull_request] # Déclenché sur un push ou une pull request
-
 # Ou plus spécifiquement :
 on:
   push:

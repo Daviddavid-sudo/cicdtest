@@ -4,3 +4,4 @@ sys.path.append(os.getcwd())
 from src.data_pd import data
 
 print(data)
+print(data)
