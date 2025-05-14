@@ -1,30 +1,28 @@
 name: Python CI
 
-# Ou plus spécifiquement :
 on:
   push:
-    branches: [ main, develop ] # Uniquement sur push vers main ou develop
+    branches: [ main, develop ]
   pull_request:
-    branches: [ main ]       # Uniquement sur PR ciblant main
+    branches: [ main ]
 
 jobs:
-  build: # Ceci est l'<job_id>, vous pouvez le nommer comme vous voulez (ex: test, lint)
-    # ... configuration du job ...
-    runs-on: ubuntu-latest # Runner Linux (le plus courant pour les projets Python)
-  # Autres options : windows-latest, macos-latest
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout du code # Nom descriptif pour l'étape
-      uses: actions/checkout@v4 # Utilise une action pour récupérer le code
+    - name: Checkout du code
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.9' # Paramètre pour l'action setup-python
+        python-version: '3.9'
 
     - name: Install dependencies
       run: |
-      pip install -r requirements.txt # Installe les dépendances à partir du fichier requirements.txt
-      pip install pytest # Exécute une commande shell
+        pip install -r requirements.txt
+        pip install pytest
 
     - name: Run tests
       run: pytest
