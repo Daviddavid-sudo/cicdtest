@@ -33,6 +33,6 @@ jobs:
           script: |
             cd /home/david/testcicd
             git pull origin main
-            source home/david/testcicd/venv/bin/activate
+            source /home/david/testcicd/venv/bin/activate
             pip install -r requirements.txt
             systemctl restart your-python-app.service
