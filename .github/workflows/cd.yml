@@ -1,5 +1,4 @@
-# .github/workflows/cd.yml
-name: Python CD
+name: Python CD - Local Deployment
 
 on:
   workflow_run:
@@ -9,8 +8,8 @@ on:
 
 jobs:
   deploy:
+    runs-on: self-hosted
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -24,15 +23,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /home/david/testcicd
-            git pull origin main
-            source /home/david/testcicd/venv/bin/activate
-            pip install -r requirements.txt
-            systemctl restart your-python-app.service
+      - name: Deploy app locally
+        run: |
+          cd /home/david/testcicd
+          git pull origin main
+          source /home/david/testcicd/venv/bin/activate
+          pip install -r requirements.txt
+          systemctl restart your-python-app.service
